@@ -14,7 +14,7 @@ type month =
 
 export type SessionType = {
     title: string;
-    isRunning: boolean;
+    isLive: boolean;
     description: string;
     startMonth: month;
     endMonth: month;
@@ -25,5 +25,6 @@ export interface SessionsListProps
     extends React.HTMLAttributes<HTMLDivElement> {
     title: string;
     link: string;
+    ctaBtn: string;
     sessions: SessionType[];
 }
