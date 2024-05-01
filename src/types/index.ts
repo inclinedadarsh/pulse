@@ -27,4 +27,5 @@ export interface SessionsListProps
     link: string;
     ctaBtn: string;
     sessions: SessionType[];
+    dashboard: string;
 }
