@@ -29,3 +29,20 @@ export interface SessionsListProps
     sessions: SessionType[];
     dashboard: string;
 }
+
+type SubmissionType = {
+    assignment: {
+        title?: String;
+        description?: String;
+    };
+    answer: String;
+    _id: String;
+};
+
+export interface ProjectDetailsProps
+    extends React.HTMLAttributes<HTMLDivElement> {
+    name: string;
+    description: string;
+    team: { name: string }[];
+    submission: SubmissionType[];
+}

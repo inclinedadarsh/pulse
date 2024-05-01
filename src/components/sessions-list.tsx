@@ -72,7 +72,11 @@ const SessionsList = ({
                             </CardContent>
                             <CardFooter>
                                 <Link
-                                    href={`/${dashboard}/session`}
+                                    href={
+                                        dashboard == "dashboard1"
+                                            ? "/dashboard1/project"
+                                            : "dashboard2/session"
+                                    }
                                     className={cn(
                                         buttonVariants({
                                             variant: session.isLive
