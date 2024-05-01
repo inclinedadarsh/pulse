@@ -16,17 +16,35 @@ import { Label } from "@/components/ui/label";
 import { ViewContainer } from "@/components/ui/view-container";
 import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
+import axios from "axios";
 
 export default function LoginForm() {
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
+    const [route, setRoute] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
-    const handleClick = () => {
+    const handleClick = async () => {
         setIsLoading(true);
-        setTimeout(() => {
+        if (!username || !password) {
+            alert("Username and password are required.");
             setIsLoading(false);
-            router.push("/dashboard");
-        }, 4000);
+            return;
+        }
+        try {
+            const res = await axios.post("http://127.0.0.1:3001/login", {
+                username,
+                password,
+            });
+            console.log(res.data.dashboard);
+            setRoute(res.data.dashboard);
+            router.push(route);
+        } catch (error) {
+            alert("Invalid creds");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -42,17 +60,26 @@ export default function LoginForm() {
                     </CardHeader>
                     <CardContent className='grid gap-4'>
                         <div className='grid gap-2'>
-                            <Label htmlFor='email'>Email</Label>
+                            <Label htmlFor='username'>Username</Label>
                             <Input
-                                id='email'
-                                type='email'
-                                placeholder='m@example.com'
+                                id='username'
+                                type='username'
+                                placeholder='Username'
                                 required
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
                             />
                         </div>
                         <div className='grid gap-2'>
                             <Label htmlFor='password'>Password</Label>
-                            <Input id='password' type='password' required />
+                            <Input
+                                id='password'
+                                type='password'
+                                required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder='Password'
+                            />
                         </div>
                     </CardContent>
                     <CardFooter className='flex flex-col gap-3'>
