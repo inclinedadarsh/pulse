@@ -21,6 +21,11 @@ export type SessionType = {
     id: string;
 };
 
+export type ProjectType = {
+    name: string;
+    description: string;
+};
+
 export interface SessionsListProps
     extends React.HTMLAttributes<HTMLDivElement> {
     title: string;
@@ -28,6 +33,14 @@ export interface SessionsListProps
     ctaBtn: string;
     sessions: SessionType[];
     dashboard: string;
+}
+
+export interface ProjectsListProps
+    extends React.HTMLAttributes<HTMLDivElement> {
+    title: string;
+    link: string;
+    ctaBtn: string;
+    projects: ProjectType[];
 }
 
 type SubmissionType = {

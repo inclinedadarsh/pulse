@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { Textarea } from "./ui/textarea";
 
 type SubmissionProps = {
     sub: {
@@ -42,12 +43,12 @@ const SubmissionDetails = ({ sub }: SubmissionProps) => {
                 <p className='text-gray-600 font-medium mt-2'>
                     {sub.assignment.description}
                 </p>
-                <textarea
-                    className='w-full h-32 mt-4 px-4 py-2 border border-gray-300 rounded-lg'
+                <Textarea
                     readOnly={sub.answer == "" ? false : true}
                     value={sub.answer == "" ? answer : sub.answer.toString()}
                     onChange={(e) => setAnswer(e.target.value)}
-                ></textarea>
+                    className='my-4'
+                />
                 {sub.answer == "" && (
                     <Button onClick={handleSubmit}>
                         Submit
